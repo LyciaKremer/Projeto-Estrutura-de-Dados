@@ -33,7 +33,6 @@ def menu_professor():
     while opcao > '0':
         if opcao == '1':
             cadastrar_questao()
-            os.system('cls')
         elif opcao == '2':
             remover_questao()
         elif opcao == '3':
