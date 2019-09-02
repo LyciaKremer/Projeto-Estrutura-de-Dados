@@ -21,7 +21,7 @@ def main():
 
 
 def menu_professor():
-    print("Menu")
+    print("Menu Professor")
     print("    1 - Cadastrar Questão\n    "
           "2 - Remover Questão\n    "
           "3 - Minhas Questões\n    "
@@ -30,9 +30,10 @@ def menu_professor():
           "6 - Avaliar questões de outros professores\n    "
           "0 - Sair")
     opcao = input("Digite a opção desejada: ")
-    while opcao != '0':
+    while opcao > '0':
         if opcao == '1':
             cadastrar_questao()
+            os.system('cls')
         elif opcao == '2':
             remover_questao()
         elif opcao == '3':
@@ -43,6 +44,8 @@ def menu_professor():
             provas_anteriores()
         elif opcao == '6':
             avaliar_provas()
+        elif opcao == 0:
+            pass
         else:
             print("Opção inválida")
 
@@ -136,26 +139,37 @@ def avaliar_provas():
 # Parte do coordenador
 
 def menu_coordenador():
-    print("Menu\n    1 - Listar Questões\n    "
-          "2 - Cadastrar disciplinas\n    "
-          "3 - Cadastrar professor à disciplina\n    "
-          "0 - Sair\n>>> ")
+    print('Menu Coordenador\n'
+          '1 - Listar Questões\n'
+          '2 - Listar disciplinas\n'
+          '3 - Cadastrar disciplinas\n'
+          '4 - Cadastrar professor à disciplina\n'
+          '0 - Sair\n>>> ')
     op = input("Digite a opção desejada: ")
+
     # op = menu_principal()
-    while op != '4':
-        if op == '1':
-            listar_questoes()
-            break
-        elif op == '2':
-            cadastrar_disciplina()
-        elif op == '3':
-            cadastrar_professor()
-        else:
-            print("sdjhjksdfhk")
+    if op == '1':
+        listar_questoes()
+    elif op == '3':
+        cadastrar_disciplina()
+    elif op == '2':
+        listar_disciplina()
+    elif op == '4':
+        cadastrar_professor()
+    elif op == '0':
+        pass
+    else:
+        while op >= '5':
+            print("Opção inválida! Tente Novamente:")
+            menu_coordenador()
 
 
 def listar_questoes():
     print("Lista de questões: ", lquestao)
+    pass
+
+def listar_disciplina():
+    print("Lista de disciplinas: ", ldisciplina)
     pass
 
 
@@ -181,25 +195,44 @@ def cadastrar_professor():
 
 
 def menu_principal():
-    print("Menu")
-    user = int(input("    1 - Professor\n    "
-                     "2 - Coordenador\n    "
-                     "3 - Coordenador Professor\n    "
-                     "0 - Sair\n>>> "))
-    while user != 0:
-        if user == 1:
-            menu_professor()
+    while True:
+        try:
+            print("Menu")
+            user = int(input("    1 - Professor\n    "
+                             "2 - Coordenador\n    "
+                             "3 - Coordenador Professor\n    "
+                             "0 - Sair\n>>> "))
+            if not 0 <= user <= 4:
+                raise ValueError("opcção fora do range permitido")
+        except ValueError as e:
+            print("Valor inválido")
+        else:
+            pass
+        if user == 0:
+                print("Saída com sucesso!")
+                break
+        elif user == 1:
+                menu_professor()
         elif user == 2:
-            menu_coordenador()
+                menu_coordenador()
+        elif user >= 4:
+            print("Opção Inválida! "
+                    "Tente Novamente: ")
+            menu_principal()
+            while user >= 4:
+                    print("Opção Inválida! "
+                          "Tente Novamente: ")
+                    menu_principal()
+
         elif user == 3:
             menu_professor_coordenador()
         else:
-            print("Opção inválida!")
+                print("Opção inválida!")
         pass
 
 
 def menu_professor_coordenador():
-    print("Menu")
+    print("Menu Professor Coordenador")
     print("    1 - Cadastrar Questão\n    "
           "2 - Remover questão\n    "
           "3 - Minhas Questões\n    "
@@ -230,10 +263,13 @@ def menu_professor_coordenador():
             cadastrar_disciplina()
         elif opcao == '9':
             cadastrar_professor()
+        elif opcao >= '10':
+            print("Opção inválida! Tente novamente.")
+            menu_professor_coordenador()
         else:
             print("Opção inválida! Tente novamente.")
+            menu_professor_coordenador()
 
         opcao = main()
-
 
 main()
