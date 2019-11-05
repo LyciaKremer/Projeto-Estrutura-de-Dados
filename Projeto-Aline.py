@@ -143,7 +143,7 @@ def menu_coordenador():
           '2 - Listar disciplinas\n'
           '3 - Cadastrar disciplinas\n'
           '4 - Cadastrar professor à disciplina\n'
-          '0 - Sair\n>>> ')
+          '0 - Sair\n')
     op = input("Digite a opção desejada: ")
 
     # op = menu_principal()
@@ -200,9 +200,10 @@ def menu_principal():
             user = int(input("    1 - Professor\n    "
                              "2 - Coordenador\n    "
                              "3 - Coordenador Professor\n    "
-                             "0 - Sair\n>>> "))
+                             "0 - Sair\n"
+                             ">>>"))
             if not 0 <= user <= 4:
-                raise ValueError("opcção fora do range permitido")
+                raise ValueError("opção fora do range permitido")
         except ValueError as e:
             print("Valor inválido")
         else:
